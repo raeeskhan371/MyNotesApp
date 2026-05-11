@@ -1,0 +1,75 @@
+import 'package:auth_navtech/Screens/addNotes.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class Homescreen extends StatefulWidget {
+  const Homescreen({super.key});
+
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: SizedBox(
+          child: Column(
+            children: [
+              Container(
+                child: Text(
+                  " MyNotes ",
+                  style: GoogleFonts.poppins(
+                    fontSize: 40,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  children: [
+                    ListTile(
+                      leading: CircleAvatar(backgroundColor: Colors.green),
+                      title: Text("GYM Workout"),
+                      subtitle: Text('Description'),
+                      trailing: Icon(Icons.delete, color: Colors.red),
+                    ),
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Addnotes()),
+                  );
+                },
+
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.indigo,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Add Notes ",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

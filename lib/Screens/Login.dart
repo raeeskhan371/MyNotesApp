@@ -1,3 +1,5 @@
+import 'package:auth_navtech/Screens/HomeScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,6 +11,26 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuthLogin = FirebaseAuth.instance;
+
+  void AuthExceptionHandling() async {
+    try {
+      await FirebaseAuthLogin.signInWithEmailAndPassword(
+        email: emailController.text.trim().toString(),
+        password: passwordController.text.trim().toString(),
+      );
+      SnackBar(content: Text("Login Successfully"));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Homescreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$e")));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +58,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 10),
             TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 label: Text("Email"),
                 enabledBorder: OutlineInputBorder(),
@@ -46,6 +69,7 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: passwordController,
               decoration: InputDecoration(
                 label: Text("Password"),
                 enabledBorder: OutlineInputBorder(),
@@ -55,20 +79,25 @@ class _LoginState extends State<Login> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.indigo,
-              ),
-              child: Center(
-                child: Text(
-                  "Login",
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            InkWell(
+              onTap: () {
+                AuthExceptionHandling();
+              },
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.indigo,
+                ),
+                child: Center(
+                  child: Text(
+                    "Login",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
