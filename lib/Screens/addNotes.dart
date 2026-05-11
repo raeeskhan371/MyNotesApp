@@ -1,7 +1,9 @@
+import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class Addnotes extends StatefulWidget {
   const Addnotes({super.key});
@@ -11,23 +13,6 @@ class Addnotes extends StatefulWidget {
 }
 
 class _AddnotesState extends State<Addnotes> {
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController desController = TextEditingController();
-
-  Future<void> addNotes() async {
-    try {
-      await FirebaseFirestore.instance.collection("Notes").add({
-        "title": titleController.text.toString(),
-        "description": desController.text.toString(),
-      });
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Notes are Add Sucessfully")));
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("$e")));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +40,7 @@ class _AddnotesState extends State<Addnotes> {
             ),
             const SizedBox(height: 10),
             TextField(
-              controller: titleController,
+              controller: context.read<NoteAppProvider>().titleController,
               decoration: InputDecoration(
                 label: Text("Title"),
                 enabledBorder: OutlineInputBorder(),
@@ -66,7 +51,7 @@ class _AddnotesState extends State<Addnotes> {
             ),
             const SizedBox(height: 20),
             TextField(
-              controller: desController,
+              controller: context.read<NoteAppProvider>().desController,
               decoration: InputDecoration(
                 label: Text("Description"),
                 enabledBorder: OutlineInputBorder(),
@@ -78,7 +63,7 @@ class _AddnotesState extends State<Addnotes> {
             const SizedBox(height: 20),
             InkWell(
               onTap: () async {
-                await addNotes();
+                await context.read<NoteAppProvider>().addNotes(context);
               },
               child: Container(
                 height: 50,
