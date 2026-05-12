@@ -30,6 +30,7 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
               ),
+              // Stream Builder
               StreamBuilder(
                 stream: context.read<NoteAppProvider>().getData(),
                 builder: (context, snapshot) {
