@@ -1,3 +1,4 @@
+import 'package:auth_navtech/ui/Ad_note_BottomeSheet.dart';
 import 'package:flutter/material.dart';
 
 class AddNotes_Button extends StatefulWidget {
@@ -10,15 +11,25 @@ class AddNotes_Button extends StatefulWidget {
 class _AddNotes_ButtonState extends State<AddNotes_Button> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 55,
-      width: 70,
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return AddNoteButtonBottomSheet();
+          },
+        );
+      },
+      child: Container(
+        height: 55,
+        width: 70,
 
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(10),
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Icon(Icons.add, color: Colors.white, size: 30),
       ),
-      child: Icon(Icons.add, color: Colors.white, size: 30),
     );
   }
 }

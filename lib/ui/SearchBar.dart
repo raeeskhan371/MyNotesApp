@@ -1,4 +1,4 @@
-import 'package:auth_navtech/UI%20Components/AddNotes_Button.dart';
+import 'package:auth_navtech/ui/AddNotes_Button.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarr extends StatelessWidget {
