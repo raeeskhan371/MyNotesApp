@@ -1,5 +1,6 @@
 import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
 import 'package:auth_navtech/Screens/addNotes.dart';
+import 'package:auth_navtech/Screens/edit_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,29 +32,59 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               // Stream Builder
-              StreamBuilder(
-                stream: context.read<NoteAppProvider>().getData(),
-                builder: (context, snapshot) {
-                  var docs = snapshot.data!.docs;
+              Expanded(
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("Notes")
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                  return Expanded(
-                    child: ListView.builder(
+                    var docs = snapshot.data!.docs;
+                    return ListView.builder(
                       itemCount: docs.length,
                       itemBuilder: (context, index) {
-                        var mydocs = docs[index];
                         return ListTile(
-                          leading: CircleAvatar(backgroundColor: Colors.green),
-                          title: Text(mydocs["title"]),
-                          subtitle: Text(mydocs["description"]),
-                          trailing: GestureDetector(
-                            onTap: () {},
-                            child: Icon(Icons.delete, color: Colors.red),
+                          title: Text(docs[index]["title"]),
+                          subtitle: Text(docs[index]["description"]),
+
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              GestureDetector(
+                                onTap: () async {
+                                  await FirebaseFirestore.instance
+                                      .collection("Notes")
+                                      .doc(docs[index].id)
+                                      .delete();
+                                },
+                                child: Icon(Icons.delete),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EditScreen(
+                                        title: docs[index]["title"].toString(),
+                                        description: docs[index]["description"]
+                                            .toString(),
+                                        id: docs[index].id.toString(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Icon(Icons.edit),
+                              ),
+                            ],
                           ),
                         );
                       },
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
               InkWell(
                 onTap: () {

@@ -8,6 +8,8 @@ class NoteAppProvider extends ChangeNotifier {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController desController = TextEditingController();
+  final TextEditingController updateTitleController = TextEditingController();
+  final TextEditingController updateDescontroller = TextEditingController();
 
   // AddNote Function
   Future<void> addNotes(BuildContext context) async {
@@ -35,4 +37,6 @@ class NoteAppProvider extends ChangeNotifier {
   Stream<QuerySnapshot>? getData() {
     return firestore.collection("Notes").snapshots();
   }
+
+  Stream<QuerySnapshot>? getNotes() {}
 }

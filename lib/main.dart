@@ -1,5 +1,6 @@
 import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
 import 'package:auth_navtech/Screens/Login.dart';
+import 'package:auth_navtech/Screens/ShowNotes.dart';
 import 'package:auth_navtech/Screens/SignUp.dart';
 import 'package:auth_navtech/Screens/addNotes.dart';
 import 'package:auth_navtech/firebase_options.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: Addnotes(),
+      home: ShowAllNotes(),
     );
   }
 }
