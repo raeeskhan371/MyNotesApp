@@ -1,6 +1,6 @@
 import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
 import 'package:auth_navtech/Screens/Login.dart';
-import 'package:auth_navtech/Screens/ShowNotes.dart';
+import 'package:auth_navtech/ui/ShowNotes.dart';
 import 'package:auth_navtech/Screens/SignUp.dart';
 import 'package:auth_navtech/Screens/addNotes.dart';
 import 'package:auth_navtech/firebase_options.dart';
@@ -13,9 +13,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => NoteAppProvider()),
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => NotesProvider())],
       child: MyApp(),
     ),
   );

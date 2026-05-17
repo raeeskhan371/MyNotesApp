@@ -1,92 +1,92 @@
-import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:provider/provider.dart';
 
-class Addnotes extends StatefulWidget {
-  const Addnotes({super.key});
+// class Addnotes extends StatefulWidget {
+//   const Addnotes({super.key});
 
-  @override
-  State<Addnotes> createState() => _AddnotesState();
-}
+//   @override
+//   State<Addnotes> createState() => _AddnotesState();
+// }
 
-class _AddnotesState extends State<Addnotes> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(height: 50),
-            Text(
-              "AddNotes!",
-              style: GoogleFonts.poppins(
-                color: Colors.indigoAccent,
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "",
-              style: GoogleFonts.poppins(
-                color: Colors.blueAccent,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: context.read<NoteAppProvider>().titleController,
-              decoration: InputDecoration(
-                label: Text("Title"),
-                enabledBorder: OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              controller: context.read<NoteAppProvider>().desController,
-              decoration: InputDecoration(
-                label: Text("Description"),
-                enabledBorder: OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            InkWell(
-              onTap: () async {
-                await context.read<NoteAppProvider>().addNotes(context);
-              },
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.indigo,
-                ),
-                child: Center(
-                  child: Text(
-                    "Addnotes",
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+// class _AddnotesState extends State<Addnotes> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Padding(
+//         padding: const EdgeInsets.all(20),
+//         child: Column(
+//           children: [
+//             const SizedBox(height: 50),
+//             Text(
+//               "AddNotes!",
+//               style: GoogleFonts.poppins(
+//                 color: Colors.indigoAccent,
+//                 fontSize: 40,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             const SizedBox(height: 10),
+//             Text(
+//               "",
+//               style: GoogleFonts.poppins(
+//                 color: Colors.blueAccent,
+//                 fontSize: 18,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//             const SizedBox(height: 10),
+//             TextField(
+//               controller: context.read<NoteAppProvider>().titleController,
+//               decoration: InputDecoration(
+//                 label: Text("Title"),
+//                 enabledBorder: OutlineInputBorder(),
+//                 focusedBorder: OutlineInputBorder(
+//                   borderSide: BorderSide(color: Colors.blue),
+//                 ),
+//               ),
+//             ),
+//             const SizedBox(height: 20),
+//             TextField(
+//               controller: context.read<NoteAppProvider>().desController,
+//               decoration: InputDecoration(
+//                 label: Text("Description"),
+//                 enabledBorder: OutlineInputBorder(),
+//                 focusedBorder: OutlineInputBorder(
+//                   borderSide: BorderSide(color: Colors.blue),
+//                 ),
+//               ),
+//             ),
+//             const SizedBox(height: 20),
+//             InkWell(
+//               onTap: () async {
+//                 await context.read<NoteAppProvider>().addNotes(context);
+//               },
+//               child: Container(
+//                 height: 50,
+//                 width: double.infinity,
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(5),
+//                   color: Colors.indigo,
+//                 ),
+//                 child: Center(
+//                   child: Text(
+//                     "Addnotes",
+//                     style: GoogleFonts.poppins(
+//                       color: Colors.white,
+//                       fontSize: 20,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

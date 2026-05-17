@@ -1,5 +1,8 @@
+import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
+import 'package:auth_navtech/ui/Customise_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddNoteButtonBottomSheet extends StatelessWidget {
   const AddNoteButtonBottomSheet({super.key});
@@ -24,6 +27,7 @@ class AddNoteButtonBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             TextField(
+              controller: context.read<NotesProvider>().titleController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -36,6 +40,7 @@ class AddNoteButtonBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextField(
+              controller: context.read<NotesProvider>().desController,
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -46,7 +51,28 @@ class AddNoteButtonBottomSheet extends StatelessWidget {
                 ),
               ),
             ),
-            Customise_button(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Customise_button(
+                  onPressed: () async {
+                    await context.read<NotesProvider>().addNotes();
+                    Navigator.pop(context);
+                  },
+                  buttonText: "Add Note",
+                  textColor: Colors.white,
+                  buttonColor: Colors.blue,
+                ),
+                Customise_button(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  buttonText: "Cancel",
+                  textColor: Colors.white,
+                  buttonColor: Colors.red,
+                ),
+              ],
+            ),
           ],
         ),
       ),
