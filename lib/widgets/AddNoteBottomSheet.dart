@@ -1,12 +1,17 @@
 import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
-import 'package:auth_navtech/ui/Customise_button.dart';
+import 'package:auth_navtech/widgets/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AddNoteButtonBottomSheet extends StatelessWidget {
-  const AddNoteButtonBottomSheet({super.key});
+class AddNoteBottomSheet extends StatefulWidget {
+  const AddNoteBottomSheet({super.key});
 
+  @override
+  State<AddNoteBottomSheet> createState() => _AddNoteBottomSheetState();
+}
+
+class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,16 +59,16 @@ class AddNoteButtonBottomSheet extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Customise_button(
+                CustomButton(
                   onPressed: () async {
-                    await context.read<NotesProvider>().addNotes();
+                    await context.read<NotesProvider>().addNote();
                     Navigator.pop(context);
                   },
                   buttonText: "Add Note",
                   textColor: Colors.white,
                   buttonColor: Colors.blue,
                 ),
-                Customise_button(
+                CustomButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },

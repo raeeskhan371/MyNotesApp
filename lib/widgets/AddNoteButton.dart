@@ -1,14 +1,9 @@
-import 'package:auth_navtech/ui/Ad_note_BottomeSheet.dart';
+import 'package:auth_navtech/widgets/AddNoteBottomSheet.dart';
 import 'package:flutter/material.dart';
 
-class AddNotes_Button extends StatefulWidget {
-  AddNotes_Button({super.key});
+class AddNoteButton extends StatelessWidget {
+  AddNoteButton({super.key});
 
-  @override
-  State<AddNotes_Button> createState() => _AddNotes_ButtonState();
-}
-
-class _AddNotes_ButtonState extends State<AddNotes_Button> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -16,7 +11,7 @@ class _AddNotes_ButtonState extends State<AddNotes_Button> {
         showModalBottomSheet(
           context: context,
           builder: (context) {
-            return AddNoteButtonBottomSheet();
+            return AddNoteBottomSheet();
           },
         );
       },

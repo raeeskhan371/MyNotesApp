@@ -9,11 +9,26 @@ class NotesProvider extends ChangeNotifier {
   final TextEditingController desController = TextEditingController();
 
   // AddNotes Function
-  Future<void> addNotes() async {
+  Future<void> addNote() async {
     await notesCollection.add({
       "title": titleController.text.toString(),
       "description": desController.text.toString(),
     });
+    titleController.clear();
+    desController.clear();
+
     notifyListeners();
+  }
+
+  // getNotes Function
+
+  Stream<QuerySnapshot> getNotes() {
+    return notesCollection.snapshots();
+  }
+
+  // DeleteNote Function
+
+  Future<void> deletNote(String id) async {
+    await notesCollection.doc(id).delete();
   }
 }

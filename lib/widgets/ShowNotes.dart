@@ -1,6 +1,9 @@
-import 'package:auth_navtech/ui/SearchBar.dart';
+import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
+import 'package:auth_navtech/widgets/NoteCard.dart';
+import 'package:auth_navtech/widgets/NotesSearchBar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ShowAllNotes extends StatefulWidget {
   const ShowAllNotes({super.key});
@@ -31,7 +34,6 @@ class _ShowAllNotesState extends State<ShowAllNotes> {
                       ),
                     ),
                     Spacer(),
-
                     Icon(Icons.search),
                     const SizedBox(width: 10),
                     Icon(Icons.menu),
@@ -41,9 +43,24 @@ class _ShowAllNotesState extends State<ShowAllNotes> {
                   "All your thoughts in one place.",
                   style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey),
                 ),
-
                 // Search Bar Content
-                SearchBarr(),
+                NotesSearchBar(),
+                Expanded(
+                  child: StreamBuilder(
+                    stream: context.read<NotesProvider>().getNotes(),
+                    builder: (context, snapshot) {
+                      var docs = snapshot.data!.docs;
+                      return ListView.builder(
+                        itemCount: docs.length,
+                        itemBuilder: (context, Index) {
+                          var doc = docs[Index];
+
+                          return NoteCard(doc: doc);
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

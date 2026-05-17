@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Customise_button extends StatefulWidget {
+class CustomButton extends StatelessWidget {
   VoidCallback onPressed;
   String buttonText;
   Color textColor;
   Color buttonColor;
-  Customise_button({
+  CustomButton({
     super.key,
     required this.buttonText,
     required this.textColor,
@@ -15,26 +15,21 @@ class Customise_button extends StatefulWidget {
   });
 
   @override
-  State<Customise_button> createState() => _Customise_buttonState();
-}
-
-class _Customise_buttonState extends State<Customise_button> {
-  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: widget.buttonColor,
+        backgroundColor: buttonColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(5),
         ),
       ),
-      onPressed: widget.onPressed,
+      onPressed: onPressed,
       child: Text(
-        widget.buttonText,
+        buttonText,
         style: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: widget.textColor,
+          color: textColor,
         ),
       ),
     );

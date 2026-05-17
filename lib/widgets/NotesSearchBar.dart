@@ -1,8 +1,8 @@
-import 'package:auth_navtech/ui/AddNotes_Button.dart';
+import 'package:auth_navtech/widgets/AddNoteButton.dart';
 import 'package:flutter/material.dart';
 
-class SearchBarr extends StatelessWidget {
-  const SearchBarr({super.key});
+class NotesSearchBar extends StatelessWidget {
+  const NotesSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class SearchBarr extends StatelessWidget {
             ),
           ),
           // add Task Container
-          AddNotes_Button(),
+          AddNoteButton(),
         ],
       ),
     );
