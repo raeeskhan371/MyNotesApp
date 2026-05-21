@@ -1,6 +1,10 @@
 import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
+import 'package:auth_navtech/Screens/SignUp.dart';
 import 'package:auth_navtech/firebase_options.dart';
-import 'package:auth_navtech/widgets/ShowNotes.dart';
+import 'package:auth_navtech/widgets/Final.dart';
+import 'package:auth_navtech/widgets/NoteCard.dart';
+import 'package:auth_navtech/Screens/ShowNotes.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: ShowAllNotes(),
+      home: Signup(),
     );
   }
 }

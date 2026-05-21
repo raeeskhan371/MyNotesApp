@@ -21,14 +21,20 @@ class NotesProvider extends ChangeNotifier {
   }
 
   // getNotes Function
-
   Stream<QuerySnapshot> getNotes() {
     return notesCollection.snapshots();
   }
 
   // DeleteNote Function
-
   Future<void> deletNote(String id) async {
     await notesCollection.doc(id).delete();
+  }
+
+  // UpdateNote
+  Future<void> updateNote(String id) async {
+    await notesCollection.doc(id).update({
+      "title": titleController.text,
+      "description": desController.text,
+    });
   }
 }

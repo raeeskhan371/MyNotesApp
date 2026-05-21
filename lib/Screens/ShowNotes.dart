@@ -16,6 +16,7 @@ class _ShowAllNotesState extends State<ShowAllNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
@@ -49,7 +50,28 @@ class _ShowAllNotesState extends State<ShowAllNotes> {
                   child: StreamBuilder(
                     stream: context.read<NotesProvider>().getNotes(),
                     builder: (context, snapshot) {
+                      // Conditonss
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Text("Please Check Internetconnection");
+                      }
+
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return Center(
+                          child: Text(
+                            "No Notes Yet",
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        );
+                      }
                       var docs = snapshot.data!.docs;
+
                       return ListView.builder(
                         itemCount: docs.length,
                         itemBuilder: (context, Index) {

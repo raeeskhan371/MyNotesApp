@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AddNoteBottomSheet extends StatefulWidget {
-  const AddNoteBottomSheet({super.key});
+class UpdateNoteBottomSheet extends StatefulWidget {
+  final String? id;
+  UpdateNoteBottomSheet({super.key, required this.id});
 
   @override
-  State<AddNoteBottomSheet> createState() => _AddNoteBottomSheetState();
+  State<UpdateNoteBottomSheet> createState() => _UpdateNoteBottomSheetState();
 }
 
-class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
+class _UpdateNoteBottomSheetState extends State<UpdateNoteBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -62,10 +63,12 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
                 children: [
                   CustomButton(
                     onPressed: () async {
-                      await context.read<NotesProvider>().addNote();
+                      await context.read<NotesProvider>().updateNote(
+                        widget.id!,
+                      );
                       Navigator.pop(context);
                     },
-                    buttonText: "Add Note",
+                    buttonText: "Update Note",
                     textColor: Colors.white,
                     buttonColor: Colors.blue,
                   ),
