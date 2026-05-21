@@ -1,8 +1,11 @@
+import 'package:auth_navtech/Provider/NotesApp_Provider.dart';
 import 'package:auth_navtech/Screens/Login.dart';
+import 'package:auth_navtech/appFunctions/function.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -12,12 +15,9 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
   final FirebaseAuthSignUp = FirebaseAuth.instance;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   String emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
   String specialChracterpass = r'[!@#$%^&*(),.?":{}|<>]';
   late RegExp specialChracter = RegExp(specialChracterpass);
@@ -51,21 +51,8 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                validator: (email) {
-                  if (email == null || email.isEmpty) {
-                    return "Please enter email adress";
-                  }
-                  if (!email.contains("@")) {
-                    return "Invalid email";
-                  }
-                  if (!email.contains(".com")) {
-                    return "Please enter .com";
-                  }
-                  if (email.length < 5) {
-                    return "Email is to short";
-                  }
-                },
-                controller: emailController,
+                validator: context.read<NotesProvider>().emailValidation,
+                controller: context.read<NotesProvider>().emailController,
                 decoration: InputDecoration(
                   label: Text("Email"),
                   enabledBorder: OutlineInputBorder(),
@@ -76,15 +63,8 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                validator: (password) {
-                  if (password == null || password.isEmpty) {
-                    return "Please enter password";
-                  }
-                  if (password.length < 8) {
-                    return "Please enter minimum  8 chracter";
-                  }
-                },
-                controller: passwordController,
+                validator: context.read<NotesProvider>().passwordValidation,
+                controller: context.read<NotesProvider>().passwordController,
                 decoration: InputDecoration(
                   label: Text("Password"),
                   enabledBorder: OutlineInputBorder(),
@@ -95,15 +75,10 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                validator: (ConfirmPass) {
-                  if (ConfirmPass == null || ConfirmPass.isEmpty) {
-                    return "Confirm password is incorrect";
-                  }
-                  if (ConfirmPass != passwordController.text) {
-                    return "Confirm password is incorrect check your in correct passwrod";
-                  }
-                },
-                controller: confirmPasswordController,
+                validator: context.read<NotesProvider>().confirmValidation,
+                controller: context
+                    .read<NotesProvider>()
+                    .confirmPasswordController,
                 decoration: InputDecoration(
                   label: Text("Confirm Password"),
                   enabledBorder: OutlineInputBorder(),
@@ -118,8 +93,16 @@ class _SignupState extends State<Signup> {
                 onTap: () {
                   if (_key.currentState!.validate()) {
                     FirebaseAuthSignUp.createUserWithEmailAndPassword(
-                      email: emailController.text.toString(),
-                      password: passwordController.text.toString(),
+                      email: context
+                          .read<NotesProvider>()
+                          .emailController
+                          .text
+                          .toString(),
+                      password: context
+                          .read<NotesProvider>()
+                          .passwordController
+                          .text
+                          .toString(),
                     );
                     Navigator.push(
                       context,
