@@ -15,15 +15,17 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  final FirebaseAuthSignUp = FirebaseAuth.instance;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   String emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
   String specialChracterpass = r'[!@#$%^&*(),.?":{}|<>]';
   late RegExp specialChracter = RegExp(specialChracterpass);
   late RegExp emailChecker = RegExp(emailPattern);
+
   @override
   Widget build(BuildContext context) {
+    NotesProvider noteProvider = context.read<NotesProvider>();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -51,8 +53,8 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 10),
               TextFormField(
-                validator: context.read<NotesProvider>().emailValidation,
-                controller: context.read<NotesProvider>().emailController,
+                validator: noteProvider.emailValidation,
+                controller: noteProvider.emailController,
                 decoration: InputDecoration(
                   label: Text("Email"),
                   enabledBorder: OutlineInputBorder(),
@@ -63,8 +65,8 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                validator: context.read<NotesProvider>().passwordValidation,
-                controller: context.read<NotesProvider>().passwordController,
+                validator: noteProvider.passwordValidation,
+                controller: noteProvider.passwordController,
                 decoration: InputDecoration(
                   label: Text("Password"),
                   enabledBorder: OutlineInputBorder(),
@@ -75,7 +77,7 @@ class _SignupState extends State<Signup> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                validator: context.read<NotesProvider>().confirmValidation,
+                validator: noteProvider.confirmValidation,
                 controller: context
                     .read<NotesProvider>()
                     .confirmPasswordController,
@@ -90,26 +92,14 @@ class _SignupState extends State<Signup> {
               const SizedBox(height: 20),
               // SignuP Button
               InkWell(
-                onTap: () {
+                onTap: () async {
                   if (_key.currentState!.validate()) {
-                    FirebaseAuthSignUp.createUserWithEmailAndPassword(
-                      email: context
-                          .read<NotesProvider>()
-                          .emailController
-                          .text
-                          .toString(),
-                      password: context
-                          .read<NotesProvider>()
-                          .passwordController
-                          .text
-                          .toString(),
-                    );
+                    await noteProvider.signUpWithEmail();
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Login()),
                     );
-                  } else
-                    return null;
+                  }
                 },
                 child: Container(
                   height: 50,

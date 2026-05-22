@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class NotesProvider extends ChangeNotifier {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final notesCollection = FirebaseFirestore.instance.collection("Notes");
 
   final TextEditingController titleController = TextEditingController();
@@ -42,6 +44,18 @@ class NotesProvider extends ChangeNotifier {
     });
   }
 
+  // signUpWithEmail Function
+  Future<void> signUpWithEmail() async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      print("Firebase error : ${e.message}");
+    }
+  }
+
   // Email Validation
   String? emailValidation(String? email) {
     if (email == null || email.isEmpty) {
@@ -72,6 +86,7 @@ class NotesProvider extends ChangeNotifier {
     }
   }
 
+  // ConfirmPass Validation
   String? confirmValidation(String? ConfirmPass) {
     if (ConfirmPass == null || ConfirmPass.isEmpty) {
       return "Confirm password is incorrect";
