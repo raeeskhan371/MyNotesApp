@@ -1,17 +1,54 @@
-# auth_navtech
+# MyNotesApp
 
-A new Flutter project.
+# MyNotesApp
 
-## Getting Started
+A clean and modern Flutter Notes Application built with Firebase and Provider state management. This project was created as my second Flutter learning project to practice real-world app development concepts such as Firebase Authentication, Firestore CRUD operations, realtime data streaming, Provider state management, reusable widgets, and BottomSheet UI patterns.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+* Firebase Email Authentication
+* Add Notes
+* Update Notes
+* Delete Notes
+* Realtime Firestore Integration
+* Provider State Management
+* Custom Reusable Widgets
+* BottomSheet-based Note Editing
+* Form Validation
+* Modern UI Design
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Technologies Used
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Flutter
+* Dart
+* Firebase Authentication
+* Cloud Firestore
+* Provider
+* Google Fonts
+
+## What I Learned
+
+This project helped me understand:
+
+* Firebase CRUD operations
+* Authentication flow
+* StreamBuilder and realtime updates
+* Provider basics
+* Widget reusability
+* Form validation
+* Flutter UI structuring
+* BottomSheet implementation
+* Basic app architecture concepts
+
+## Future Improvements
+
+* Clean Architecture
+* Note Models
+* Better Error Handling
+* Search Functionality
+* Theme Support
+* Loading States
+* User-specific Notes Collections
+* Improved Folder Structure
+
+This project represents an important milestone in my Flutter learning journey and helped me transition from beginner concepts toward building more structured and scalable Flutter applications.
